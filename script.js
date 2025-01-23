@@ -1,37 +1,44 @@
-// هنا يتم إضافة الأزرار للفصول
+// الفصول المبدئية
 const chapters = [
-    "الفصل 1: البداية",
-    "الفصل 2: القصة تستمر",
-    "الفصل 3: اللحظة الحاسمة",
-    // يمكنك إضافة المزيد من الفصول هنا
+    { number: 1, title: "الفصل 1: البداية", url: "chapter1.html" },
+    { number: 2, title: "الفصل 2: القصة تستمر", url: "chapter2.html" },
+    { number: 3, title: "الفصل 3: اللحظة الحاسمة", url: "chapter3.html" },
+    { number: 4, title: "الفصل 4: المزيد من المغامرة", url: "chapter4.html" }
 ];
 
-const chapterButtonsContainer = document.getElementById('chapter-buttons').querySelector('.row');
+// دالة لعرض الأزرار الخاصة بالفصول
+function displayChapters() {
+    const chapterButtons = document.getElementById('chapter-buttons');
+    chapterButtons.innerHTML = '';  // مسح المحتوى الحالي
 
-// إضافة الأزرار لكل فصل
-chapters.forEach(chapter => {
-    const button = document.createElement('button');
-    button.classList.add('btn', 'btn-outline-light');
-    button.textContent = chapter;
-    button.onclick = () => {
-        alert(`لقد اخترت ${chapter}`);
-        // هنا يمكنك إضافة رابط أو أي تصرف آخر عند الضغط على الفصل
-    };
-    const col = document.createElement('div');
-    col.classList.add('col-12', 'col-md-4');
-    col.appendChild(button);
-    chapterButtonsContainer.appendChild(col);
-});
+    chapters.forEach((chapter) => {
+        const button = document.createElement('button');
+        button.classList.add('btn');
+        button.innerText = chapter.title;
+        button.onclick = () => window.location.href = chapter.url;
+        chapterButtons.appendChild(button);
+    });
+}
 
-// منع النسخ والقص واللصق
-document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && (e.key === 'c' || e.key === 'x' || e.key === 'a' || e.key === 'v')) {
-        e.preventDefault(); // منع القص والنسخ واللصق
-        console.log('Copy/cut/paste/select-all shortcuts are disabled.');
-    }
-});
+// دالة البحث عن الفصل
+function searchChapter() {
+    const searchInput = document.getElementById('search-input').value.toLowerCase();
+    const filteredChapters = chapters.filter(chapter => 
+        chapter.title.toLowerCase().includes(searchInput) || 
+        chapter.number.toString().includes(searchInput)
+    );
 
-document.addEventListener('contextmenu', (e) => {
-    e.preventDefault(); // منع المينيو الخاص بالزر الأيمن
-    console.log('Right-click is disabled.');
-});
+    // تحديث الأزرار بناءً على البحث
+    const chapterButtons = document.getElementById('chapter-buttons');
+    chapterButtons.innerHTML = '';
+    filteredChapters.forEach((chapter) => {
+        const button = document.createElement('button');
+        button.classList.add('btn');
+        button.innerText = chapter.title;
+        button.onclick = () => window.location.href = chapter.url;
+        chapterButtons.appendChild(button);
+    });
+}
+
+// تنفيذ عرض الفصول عند تحميل الصفحة
+window.onload = displayChapters;
