@@ -1,37 +1,6 @@
-body {
-    font-family: 'Cairo', serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
-
-#side-menu {
-    width: 250px;
-    min-height: 100vh;
-}
-
-#side-menu h2 {
-    font-family: 'Cairo', sans-serif;
-}
-
-.nav-link {
-    margin: 10px 0;
-}
-
-main {
-    padding: 20px;
-    flex-grow: 1;
-    background: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: right;
-}
-
-footer {
-    background: #333;
-    color: #fff;
-    padding: 10px 0;
-}
-
-footer p {
-    margin: 0;
+body, main, footer {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version */
 }
