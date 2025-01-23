@@ -1,41 +1,37 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    const novelContent = document.getElementById('novel-content');
+// هنا يتم إضافة الأزرار للفصول
+const chapters = [
+    "الفصل 1: البداية",
+    "الفصل 2: القصة تستمر",
+    "الفصل 3: اللحظة الحاسمة",
+    // يمكنك إضافة المزيد من الفصول هنا
+];
 
-    // Disable text selection
-    if (novelContent) {
-        novelContent.onselectstart = () => false;
-        novelContent.oncontextmenu = () => false;
-    } else {
-        console.error('Element with ID "novel-content" not found.');
+const chapterButtonsContainer = document.getElementById('chapter-buttons').querySelector('.row');
+
+// إضافة الأزرار لكل فصل
+chapters.forEach(chapter => {
+    const button = document.createElement('button');
+    button.classList.add('btn', 'btn-outline-light');
+    button.textContent = chapter;
+    button.onclick = () => {
+        alert(`لقد اخترت ${chapter}`);
+        // هنا يمكنك إضافة رابط أو أي تصرف آخر عند الضغط على الفصل
+    };
+    const col = document.createElement('div');
+    col.classList.add('col-12', 'col-md-4');
+    col.appendChild(button);
+    chapterButtonsContainer.appendChild(col);
+});
+
+// منع النسخ والقص واللصق
+document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && (e.key === 'c' || e.key === 'x' || e.key === 'a' || e.key === 'v')) {
+        e.preventDefault(); // منع القص والنسخ واللصق
+        console.log('Copy/cut/paste/select-all shortcuts are disabled.');
     }
+});
 
-    // Disable copy keyboard shortcuts globally
-    document.addEventListener('keydown', (e) => {
-        if (e.ctrlKey && (e.key === 'c' || e.key === 'x' || e.key === 'a')) {
-            e.preventDefault();
-            console.log('Copy/cut/select-all shortcuts are disabled.');
-        }
-    });
-
-    // Fetch and display chapters from Strapi on chapters.html
-    if (window.location.pathname.endsWith('chapters.html')) {
-        axios.get('http://localhost:1337/chapters')
-            .then(response => {
-                const chapters = response.data;
-                const chapterButtonsContainer = document.getElementById('chapter-buttons');
-                
-                chapters.forEach(chapter => {
-                    const button = document.createElement('button');
-                    button.className = 'btn btn-primary m-2';
-                    button.innerText = chapter.title;
-                    button.onclick = () => {
-                        window.location.href = `chapter.html?id=${chapter.id}`;
-                    };
-                    chapterButtonsContainer.appendChild(button);
-                });
-            })
-            .catch(error => {
-                console.error('Error fetching chapters:', error);
-            });
-    }
+document.addEventListener('contextmenu', (e) => {
+    e.preventDefault(); // منع المينيو الخاص بالزر الأيمن
+    console.log('Right-click is disabled.');
 });
