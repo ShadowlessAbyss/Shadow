@@ -3,9 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>روايتي</title>
+    <title>هاوية بلا ظل</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* استخدام خط Cairo */
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: url('https://i.postimg.cc/NffSrqT7/3d6e7ae89af11ec52282ec17cd78f9b7.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ستايل القائمة الجانبية */
+        #side-menu {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            transition: left 0.3s ease;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        #side-menu.open {
+            left: 0;
+        }
+
+        #side-menu ul {
+            padding-left: 0;
+        }
+
+        #side-menu ul li {
+            list-style: none;
+        }
+
+        #side-menu ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+        }
+
+        #side-menu ul li a:hover {
+            background-color: #333;
+        }
+
+        /* تعديل المحتوى الرئيسي ليحترم القائمة الجانبية */
+        main {
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+
+        main.open {
+            margin-left: 250px;
+        }
+
+        h1, h2 {
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        /* منع نسخ النص */
+        body, main, footer {
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version */
+        }
+    </style>
 </head>
 <body>
     <div class="d-flex">
@@ -20,8 +95,8 @@
         </nav>
         <main class="container mt-5">
             <section id="home" class="text-center">
-                <h1 class="display-4">مرحبا بكم في روايتي</h1>
-                <p class="lead">اهلاً وسهلاً بكم في موقع روايتي، حيث يمكنكم قراءة الفصول والاستمتاع بها.</p>
+                <h1 class="display-4">هاوية بلا ظل</h1>
+                <p class="lead">Shadowless abyss</p>
             </section>
             <section id="about" class="mt-5">
                 <h2>عن المؤلف</h2>
@@ -36,8 +111,21 @@
     <footer class="bg-dark text-white text-center py-3">
         <p>© 2025 روايتي. جميع الحقوق محفوظة.</p>
     </footer>
+
+    <!-- زر فتح القائمة الجانبية -->
+    <button id="toggle-menu" class="btn btn-dark" style="position: fixed; top: 20px; left: 20px;">☰</button>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
+    <script>
+        // جافا سكربت لفتح وغلق القائمة الجانبية
+        document.getElementById('toggle-menu').addEventListener('click', function() {
+            var menu = document.getElementById('side-menu');
+            var mainContent = document.querySelector('main');
+            menu.classList.toggle('open');
+            mainContent.classList.toggle('open');
+        });
+    </script>
 </body>
 </html>
