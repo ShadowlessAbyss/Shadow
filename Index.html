@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>روايتي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- الشريط الجانبي -->
+    <div class="sidebar">
+        <!-- شريط البحث -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="ابحث عن فصل برقم">
+            <button onclick="filterChapters()">بحث</button>
+        </div>
+
+        <!-- قائمة الفصول -->
+        <ul id="chapterList"></ul>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="content">
+        <h1>مرحبًا بكم في روايتي!</h1>
+        <p>هذه هي الرواية الخاصة بي، يمكنك قراءة الفصول من خلال قائمة الفصول.</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
