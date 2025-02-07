@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفصل #</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqus.min.js"></script>
+</head>
+<body>
+    <!-- الشريط الجانبي -->
+    <div class="sidebar">
+        <!-- شريط البحث -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="ابحث عن فصل برقم">
+            <button onclick="filterChapters()">بحث</button>
+        </div>
+
+        <!-- قائمة الفصول -->
+        <ul id="chapterList"></ul>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="content">
+        <div id="chapterContent"></div>
+        <button id="nextChapterBtn" class="no-copy">الانتقال إلى الفصل التالي</button>
+
+        <!-- نظام التعليقات (Disqus) -->
+        <div id="disqus_thread"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
