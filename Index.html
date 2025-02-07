@@ -1,31 +1,54 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>روايتي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <title>قائمة الفصول</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- الشريط الجانبي -->
-    <div class="sidebar">
-        <!-- شريط البحث -->
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="ابحث عن فصل برقم">
-            <button onclick="filterChapters()">بحث</button>
-        </div>
+    <header>
+        <h1>روايتي</h1>
+    </header>
+    
+    <main>
+        <h2>الفصول المتاحة</h2>
+        <ul id="chapter-list">
+            <li>جاري تحميل الفصول...</li>
+        </ul>
+    </main>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch("chapters/chapter-list.json")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("تعذر تحميل قائمة الفصول.");
+                    }
+                    return response.json();
+                })
+                .then(chapters => {
+                    const listContainer = document.getElementById("chapter-list");
+                    listContainer.innerHTML = ""; // مسح القائمة الافتراضية
 
-        <!-- قائمة الفصول -->
-        <ul id="chapterList"></ul>
-    </div>
+                    if (chapters.length === 0) {
+                        listContainer.innerHTML = "<li>لا توجد فصول متاحة حاليًا.</li>";
+                        return;
+                    }
 
-    <!-- المحتوى الرئيسي -->
-    <div class="content">
-        <h1>مرحبًا بكم في روايتي!</h1>
-        <p>هذه هي الرواية الخاصة بي، يمكنك قراءة الفصول من خلال قائمة الفصول.</p>
-    </div>
-
-    <script src="script.js"></script>
+                    chapters.forEach(chapter => {
+                        const listItem = document.createElement("li");
+                        const link = document.createElement("a");
+                        link.href = `chapter.html?id=${chapter.id}`;
+                        link.textContent = chapter.title;
+                        listItem.appendChild(link);
+                        listContainer.appendChild(listItem);
+                    });
+                })
+                .catch(error => {
+                    document.getElementById("chapter-list").innerHTML = `<li style="color: red;">${error.message}</li>`;
+                });
+        });
+    </script>
 </body>
 </html>
