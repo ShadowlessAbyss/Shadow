@@ -1,0 +1,13 @@
+backend:
+  name: git-gateway
+  branch: main
+media_folder: "static/images"
+collections:
+  - name: "chapters"
+    label: "الفصول"
+    folder: "content/chapters"
+    create: true
+    slug: "chapter-{{slug}}"
+    fields:
+      - { label: "عنوان الفصل", name: "title", widget: "string" }
+      - { label: "المحتوى", name: "body", widget: "markdown" }
